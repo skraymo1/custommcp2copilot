@@ -1,0 +1,76 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.4/schema.json",
+    "schema_version": "v2.4",
+    "name_for_human": "Custom chat app",
+    "description_for_human": "Read-only fictional knowledge for the custom chat app demonstration.",
+    "contact_email": "${{PUBLISHER_EMAIL}}",
+    "namespace": "customchatapp",
+    "functions": [
+        { "name": "list_knowledge_domains" },
+        { "name": "search_knowledge" },
+        { "name": "get_document" },
+        { "name": "ask_knowledge" }
+    ],
+    "runtimes": [
+        {
+            "type": "RemoteMCPServer",
+            "spec": {
+                "url": "${{MCP_URL}}",
+                "mcp_tool_description": {
+                    "tools": [
+                        {
+                            "name": "list_knowledge_domains",
+                            "description": "List domains in the fictional demonstration fixtures.",
+                            "inputSchema": { "type": "object", "properties": {} }
+                        },
+                        {
+                            "name": "search_knowledge",
+                            "description": "Search fictional knowledge; return a documents envelope with provenance, even if empty.",
+                            "inputSchema": {
+                                "type": "object",
+                                "properties": {
+                                    "query": { "type": "string", "minLength": 1, "maxLength": 1000 },
+                                    "domain": { "anyOf": [{ "type": "string" }, { "type": "null" }], "default": null },
+                                    "top": { "type": "integer", "minimum": 1, "maximum": 10, "default": 3 }
+                                },
+                                "required": ["query"]
+                            }
+                        },
+                        {
+                            "name": "get_document",
+                            "description": "Read a fictional document by its returned handle, or return a mock-labeled not-found result.",
+                            "inputSchema": {
+                                "type": "object",
+                                "properties": {
+                                    "handle": { "type": "string", "minLength": 1, "maxLength": 128 }
+                                },
+                                "required": ["handle"]
+                            }
+                        },
+                        {
+                            "name": "ask_knowledge",
+                            "description": "Return a deterministic fictional answer with fixture citations, not real organizational guidance.",
+                            "inputSchema": {
+                                "type": "object",
+                                "properties": {
+                                    "question": { "type": "string", "minLength": 1, "maxLength": 1000 },
+                                    "domain": { "anyOf": [{ "type": "string" }, { "type": "null" }], "default": null }
+                                },
+                                "required": ["question"]
+                            }
+                        }
+                    ]
+                }
+            },
+            "run_for_functions": [
+                "list_knowledge_domains",
+                "search_knowledge",
+                "get_document",
+                "ask_knowledge"
+            ],
+            "auth": {
+                "type": "None"
+            }
+        }
+    ]
+}

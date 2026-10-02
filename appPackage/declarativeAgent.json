@@ -1,0 +1,23 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.8/schema.json",
+    "version": "v1.8",
+    "name": "Custom chat app${{APP_NAME_SUFFIX}}",
+    "description": "Read-only fictional project planning, onboarding, and service operations with mock citations and evidence gaps.",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Fictional onboarding",
+            "text": "Summarize the fictional onboarding guidance. Cite returned sources, label it demonstration data, and identify evidence gaps."
+        },
+        {
+            "title": "Fictional planning",
+            "text": "Find fictional project planning documents and compare only their returned evidence."
+        }
+    ],
+    "actions": [
+        {
+            "id": "customchatapp",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

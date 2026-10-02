@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.28/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.28",
+  "version": "0.2.0",
+  "id": "{{AppId}}",
+  "developer": {
+    "name": "{{PublisherName}}",
+    "websiteUrl": "{{WebsiteUrl}}",
+    "privacyUrl": "{{PrivacyUrl}}",
+    "termsOfUseUrl": "{{TermsOfUseUrl}}"
+  },
+  "name": {
+    "short": "Custom chat app",
+    "full": "Custom chat app knowledge demo for Copilot Cowork"
+  },
+  "description": {
+    "short": "Read-only fictional knowledge research and briefing drafts",
+    "full": "Demonstration workflows for fictional project planning, onboarding, and service operations. Uses the read-only mock-knowledge connector for cited answers and draft text. Results carry demonstration_data=true; example.com citations are illustrative. Anonymous access is only for the fictional public mock, not production authorization."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#0F6CBD",
+  "agentSkills": [
+    { "folder": "./skills/knowledge-research" },
+    { "folder": "./skills/knowledge-briefing" }
+  ],
+  "agentConnectors": [
+    {
+      "id": "custom-chat-app-knowledge",
+      "displayName": "Custom chat app mock knowledge",
+      "description": "Fictional public mock only: list_knowledge_domains, search_knowledge, get_document, ask_knowledge. Read-only results use source=mock-knowledge and demonstration_data=true. No private inputs or production authorization.",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "{{McpUrl}}",
+          "authorization": {
+            "type": "None"
+          }
+        }
+      }
+    }
+  ]
+}

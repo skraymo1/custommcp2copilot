@@ -1,0 +1,33 @@
+# Local environment values; commit only reviewed, nonsensitive examples.
+.env*
+!.env.example
+!.env.*.example
+env/*
+!env/.env.example
+!env/.env.*.example
+.localConfigs
+.deployment
+
+# Local MCP client configuration can contain endpoints and credentials.
+.mcp.json
+mcp.json
+mcp.local.json
+.vscode/mcp.json
+.vscode/mcp.*.json
+
+# Dependencies and Python caches (at any depth).
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Generated packages, staging, and build output (at any depth).
+dist/
+build/
+appPackage/.generated/
+
+# OS metadata.
+.DS_Store
+Thumbs.db
